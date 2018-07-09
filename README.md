@@ -11,5 +11,7 @@ This is a Create,Read,Update and Delete application on CodeIgniter framework.
 - HTML & CSS
 - BOOTSTRAP
 - PHP
+- CodeIgniter Framework
+
 
 -Manohar NG
