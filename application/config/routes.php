@@ -56,3 +56,4 @@ $route['editBlog'] = 'welcome/editBlog';
 $route['updateBlog'] = 'welcome/updateBlog';
 $route['deleteBlog'] = 'welcome/deleteBlog';
 $route['saveBlog']='/welcome/saveData';
+$route['viewBlog']='welcome/viewBlog';

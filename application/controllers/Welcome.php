@@ -24,48 +24,74 @@ class Welcome extends CI_Controller {
 		$this->load->model('blogmodel');
 	}
 
+
 	public function index()
 	{
-		$this->data['posts'] = $this->blogmodel->retrievepost();
-		$this->load->view('blog',$this->data);// loading view and giving the data from DB to display
+		$this->load->view('header');
+		$this->load->view('blog');// loading view and giving the data from DB to display
 	}
+
+
+	public function viewBlog()
+	{
+		$this->data['posts'] = $this->blogmodel->retrievepost();
+		$this->load->view('header');
+		$this->load->view('viewBlog',$this->data);
+	}
+
 
 	// controller function to store data
 	public function saveData()
 	{
+
 		$this->form_validation->set_error_delimiters('<div class="text-danger">', '</div>');
 		$this->form_validation->set_rules('head', 'Title', 'required',array('required' => 'Title for the post is mandatory'));//title cant be empty
 		$this->form_validation->set_rules('body', 'Description', 'required',array('required' => 'Description can\'t be empty' ));// body cant be empty
 		if ($this->form_validation->run() == FALSE) {//checking the form rules
-		$this->data['posts'] = $this->blogmodel->retrievepost();
-		$this->load->view('blog',$this->data); }// loading view and giving the data from DB to display
+		$this->load->view('header');
+		$this->load->view('blog');
+	 }// loading view and giving the data from DB to display
 		else {
 		$this->blogmodel->process();
-		redirect(base_url());
-	}}
+		$this->viewBlog();
+	}
+}
+
+
 	// controller function to edit the data
 	public function editBlog()
 	{
 	$pid=$this->input->get('id');
 	$data['post'] = $this->blogmodel->editBlog($pid);
-	$this->load->view('editpost',$data);
+			$this->load->view('header');
+			$this->load->view('editpost',$data);
+
 	}
+
 
 	//this is to update the blog
 	public function updateBlog()
 	{
-		$title=$this->input->post('head');
-		$desc=$this->input->post('body');
-		$id=$this->input->post('id');
-
-		$this->blogmodel->updateBlog($title,$desc,$id);
-		redirect(base_url());
+		$pid=$this->input->post('id');
+		$data['post']= $this->blogmodel->editBlog($pid);
+		$this->form_validation->set_error_delimiters('<div class="text-danger">', '</div>');
+		$this->form_validation->set_rules('head', 'Title', 'required',array('required' => 'Title for the post is mandatory'));//title cant be empty
+	 	$this->form_validation->set_rules('body', 'Description', 'required',array('required' => 'Description can\'t be empty' ));// body cant be empty
+		if ($this->form_validation->run() == FALSE){
+			 	$this->load->view('header');
+				$this->load->view('editpost',$data);
+		 }else{
+			$this->blogmodel->updateBlog();
+			$this->viewBlog();
+		}
 	}
+
+
 	//controller function to delete the data
 	public function deleteBlog()
 	{
 		$pid = $this->input->get('id');
 		$this->blogmodel->deleteBlog($pid);
-		redirect(base_url());
+		$this->viewBlog();
 	}
 }

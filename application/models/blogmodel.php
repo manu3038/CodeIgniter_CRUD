@@ -27,11 +27,15 @@
 			$query=$this->db->get();
 			return $query->result();
     }
-    public function updateBlog($title,$desc,$id)
+    public function updateBlog()
     {
+      $title=$this->input->post('head');
+      $desc=$this->input->post('body');
+      $id=$this->input->post('id');
       $data = array('title' =>$title ,'body' =>$desc);
       $this->db->update('test',$data,array('id' => $id));
       return true;
+
     }
     public function deleteBlog($id)
     {
