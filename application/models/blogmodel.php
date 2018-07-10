@@ -19,6 +19,7 @@
       $qur=$this->db->get();
       return $qur->result();
     }
+    // function to get the edit blog details
     public function editBlog($pid)
     {
 
@@ -27,6 +28,7 @@
 			$query=$this->db->get();
 			return $query->result();
     }
+    // function to update the editted blog
     public function updateBlog()
     {
       $title=$this->input->post('head');
@@ -37,6 +39,7 @@
       return true;
 
     }
+    //function to delete the blog
     public function deleteBlog($id)
     {
       $this->db->where('id',$id);
