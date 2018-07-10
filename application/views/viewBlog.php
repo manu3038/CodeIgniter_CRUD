@@ -1,4 +1,4 @@
-<body class="container"><h2>Reading data from DB:</h2>
+<body class="container"><h2>Posts of my blog:</h2>
 
 <a href="<?php echo base_url(); ?>" class="btn btn-info">Return</a>
 <br>

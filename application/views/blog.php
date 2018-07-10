@@ -15,10 +15,8 @@
         <textarea rows="3"type="text" id="body" name="body" class="form-control"><?=set_value('body');?></textarea>
       </div><?php echo form_error('body'); ?>
       <input type="submit" class="btn btn-primary" value="Submit">
-      <input type="reset" class="btn btn-danger" value="Reset">
-
     </form>
     <br>
-  <a href="viewBlog" class="btn btn-info">View BLog</a>
+    <a href="<?php echo base_url('viewBlog');?>" class="btn btn-info">View BLog</a>
   </body>
 </html>
